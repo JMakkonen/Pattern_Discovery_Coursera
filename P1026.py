@@ -99,3 +99,28 @@ print(my_data)
 print(one_itemsets(my_data,3))
 '''
     
+def all_subsets(S):
+    # returns a list of all subsets of S, including the complete set
+    # S is a set
+    L = list(S)
+    out = [S]
+    if len(L) > 1:
+        for k in range(len(L)):
+            newset = set([ L[x] for x in range(len(L)) if x != k])
+            t = all_subsets(newset)
+            for x in t:
+                out.append(x)
+    output = []
+    for x in out:
+        if not(x in output):
+            output.append(x)
+    return output
+
+def proper_subsets(S):
+    # S is a set
+    # returns a list of all proper subsets of S
+    ss = all_subsets(S)
+    pss = [ x for x in ss if x != S ]
+    return pss
+
+
